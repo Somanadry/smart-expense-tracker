@@ -4,7 +4,12 @@ A full-stack web application to track personal expenses, analyze spending patter
 
 This project was built as part of learning full-stack development and demonstrates real-world concepts like REST APIs, state management, CORS handling, and deployment readiness.
 
----
+----------------------------------------------------
+## 🌐 Live Demo
+
+Frontend: https://smart-expense-tracker002.netlify.app/  
+Backend API: https://smart-expense-tracker-u5mh.onrender.com
+
 
 ## 🚀 Tech Stack
 
@@ -110,3 +115,5 @@ Dark mode is toggle-based and persisted using localStorage
 Designed with clean architecture and separation of concerns
 
 Ready for deployment on platforms like Render (backend) and Netlify (frontend)
+
+
