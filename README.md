@@ -8,7 +8,7 @@ This project was built as part of learning full-stack development and demonstrat
 ## 🌐 Live Demo
 
 Frontend: https://smart-expense-tracker002.netlify.app/  
-Backend API: https://smart-expense-tracker-u5mh.onrender.com
+Backend API: https://smart-expense-tracker-u5mh.onrender.com/api/expenses
 
 
 ## 🚀 Tech Stack
