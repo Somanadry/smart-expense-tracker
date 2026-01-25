@@ -82,23 +82,49 @@ function AIInsights() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const res = await fetch(
-          "http://127.0.0.1:5000/api/expenses/insights"
-        );
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        setInsight(data.insight);
-      } catch {
-        setError("Unable to load AI insights.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, []);
+//   useEffect(() => {
+//     const load = async () => {
+//       try {
+//         const res = await fetch(
+//           "http://127.0.0.1:5000/api/expenses/insights"
+//         );
+//         if (!res.ok) throw new Error();
+//         const data = await res.json();
+//         setInsight(data.insight);
+//       } catch {
+//         setError("Unable to load AI insights.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     load();
+//   }, []);
+    useEffect(() => {
+  const load = async () => {
+    try {
+      const now = new Date();
+      const month = `${now.getFullYear()}-${String(
+        now.getMonth() + 1
+      ).padStart(2, "0")}`;
+
+      const res = await fetch(
+        `https://smart-expense-tracker-u5mh.onrender.com/api/expenses/insights?month=${month}`
+      );
+
+      if (!res.ok) throw new Error();
+
+      const data = await res.json();
+      setInsight(data.insight);
+    } catch {
+      setError("Unable to load AI insights.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  load();
+}, []);
+
 
   return (
     <div className="card shadow-sm">

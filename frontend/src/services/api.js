@@ -1,4 +1,5 @@
-const BASE_URL = "http://127.0.0.1:5000/api/expenses";
+const BASE_URL = "https://smart-expense-tracker-u5mh.onrender.com/api/expenses";
+// const BASE_URL = "http://127.0.0.1:5000/api/expenses";
 
 export async function fetchExpenses() {
   const response = await fetch(BASE_URL);
