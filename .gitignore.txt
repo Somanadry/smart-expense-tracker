@@ -1,0 +1,15 @@
+```gitignore
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+
+# SQLite database
+backend/instance/*.db
+
+# Node
+frontend/node_modules/
+frontend/build/
+
+# Environment files
+.env
