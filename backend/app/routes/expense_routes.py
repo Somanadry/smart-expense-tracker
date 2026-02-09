@@ -2,7 +2,9 @@ from flask import Blueprint, request, jsonify, current_app
 from app.extensions import get_db
 from app.services.insight_service import generate_insights
 from app.services.insight_service import generate_ai_insight
-
+from app.ml.expense_model import predict_category, train_category_model
+from app.ml.behavior_analysis import spending_clusters
+from app.ml.anomaly import detect_anomalies
 
 
 
@@ -208,3 +210,31 @@ def delete_expense(expense_id):
 
     return jsonify({"message": "Expense deleted successfully"}), 200
     # CORS(app) 
+    
+from app.ml.expense_model import predict_category, train_category_model
+
+@expense_bp.route("/train-model", methods=["POST"])
+def train_model():
+    try:
+        train_category_model()
+        return jsonify({"message": "Model trained"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@expense_bp.route("/predict-category", methods=["POST"])
+def predict():
+    text = request.json.get("title")
+    if not text:
+        return jsonify({"error": "title required"}), 400
+
+    pred = predict_category(text)
+    return jsonify({"predicted_category": pred})
+
+@expense_bp.route("/clusters", methods=["GET"])
+def clusters():
+    return jsonify(spending_clusters())
+
+@expense_bp.route("/anomalies", methods=["GET"])
+def anomalies():
+    return jsonify(detect_anomalies())
