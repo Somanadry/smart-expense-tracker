@@ -127,20 +127,95 @@
 // export default App;
 
 
+// import { useEffect, useState } from "react";
+// import ExpenseForm from "./components/ExpenseForm";
+// import ExpenseList from "./components/ExpenseList";
+// import ExpenseSummary from "./components/ExpenseSummary";
+// import AIInsights from "./components/AIInsights";
+// import { fetchExpenses } from "./services/api";
+
+// function App() {
+//   const [expenses, setExpenses] = useState([]);
+
+//   // const [theme, setTheme] = useState("light");
+//   const [theme, setTheme] = useState(
+//     localStorage.getItem("theme") || "light"
+//   );
+
+//   useEffect(() => {
+//     document.body.setAttribute("data-bs-theme", theme);
+//     localStorage.setItem("theme", theme);
+//   }, [theme]);
+
+//   const loadExpenses = async () => {
+//     const data = await fetchExpenses();
+//     setExpenses(data);
+//   };
+
+//   useEffect(() => {
+//     loadExpenses();
+//   }, []);
+
+
+//   return (
+//     <div className="container-fluid container-md my-4 px-3">
+//       <div className="mb-4 d-flex justify-content-between align-items-center">
+//         <div>
+//           <h1 className="fw-bold">Smart Expense Tracker</h1>
+//           <p className="text-muted mb-0">
+//             Track, analyze, and optimize your spending
+//           </p>
+//         </div>
+
+//         <button
+//           className="btn btn-outline-secondary"
+//           onClick={() =>
+//             setTheme(theme === "light" ? "dark" : "light")
+//           }
+//         >
+//           {theme === "light" ? "Dark Mode" : "Light Mode"}
+//         </button>
+//       </div>
+
+//       {/* Form + Summary */}
+//       <div className="row g-4 mb-4">
+//         <div className="col-md-6">
+//           <ExpenseForm onExpenseAdded={loadExpenses} />
+//         </div>
+//         <div className="col-md-6">
+//           <ExpenseSummary expenses={expenses} />
+//         </div>
+//       </div>
+
+//       {/* Expense List */}
+//       <div className="mb-4">
+//         <ExpenseList
+//           expenses={expenses}
+//           onExpenseDeleted={loadExpenses}
+//         />
+//       </div>
+
+//       {/* AI Insights */}
+//       <div className="mt-4">
+//         <AIInsights />
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
 import { useEffect, useState } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseSummary from "./components/ExpenseSummary";
-import AIInsights from "./components/AIInsights";
+import InsightDashboard from "./features/insights/InsightDashboard";
 import { fetchExpenses } from "./services/api";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
-
-  // const [theme, setTheme] = useState("light");
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "light"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
     document.body.setAttribute("data-bs-theme", theme);
@@ -156,10 +231,6 @@ function App() {
     loadExpenses();
   }, []);
 
-  // useEffect(() => {
-  //   document.body.setAttribute("data-bs-theme", theme);
-  // }, [theme]);
-
   return (
     <div className="container-fluid container-md my-4 px-3">
       <div className="mb-4 d-flex justify-content-between align-items-center">
@@ -172,9 +243,7 @@ function App() {
 
         <button
           className="btn btn-outline-secondary"
-          onClick={() =>
-            setTheme(theme === "light" ? "dark" : "light")
-          }
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
           {theme === "light" ? "Dark Mode" : "Light Mode"}
         </button>
@@ -198,9 +267,10 @@ function App() {
         />
       </div>
 
-      {/* AI Insights */}
-      <div className="mt-4">
-        <AIInsights />
+      {/* ML Intelligence Dashboard */}
+      <div className="mt-5">
+        <h4 className="mb-3 fw-semibold">Financial Intelligence</h4>
+        <InsightDashboard />
       </div>
     </div>
   );

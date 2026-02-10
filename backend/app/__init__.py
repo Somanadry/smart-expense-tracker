@@ -1,10 +1,41 @@
+# from flask import Flask
+# from flask_cors import CORS
+
+# from app.routes.health import health_bp
+# from app.routes.expense_routes import expense_bp
+# from app.config import Config
+# from app.extensions import close_db
+# from app.routes.ml_routes import ml_bp
+
+
+# def create_app():
+#     app = Flask(__name__)
+#     app.config.from_object(Config)
+
+#     CORS(
+#     app,
+#     resources={r"/api/*": {"origins": "*"}},
+#     methods=["GET", "POST", "DELETE", "OPTIONS"],
+#     allow_headers=["Content-Type"]
+# )
+
+
+#     app.register_blueprint(health_bp)
+#     app.register_blueprint(expense_bp)
+#     app.register_blueprint(ml_bp)
+#     app.teardown_appcontext(close_db)
+#     print(app.url_map)
+
+#     return app
 from flask import Flask
 from flask_cors import CORS
 
+from app.config import Config
+from app.extensions import db
+
 from app.routes.health import health_bp
 from app.routes.expense_routes import expense_bp
-from app.config import Config
-from app.extensions import close_db
+from app.routes.ml_routes import ml_bp
 
 
 def create_app():
@@ -12,17 +43,19 @@ def create_app():
     app.config.from_object(Config)
 
     CORS(
-    app,
-    resources={r"/api/*": {"origins": "*"}},
-    methods=["GET", "POST", "DELETE", "OPTIONS"],
-    allow_headers=["Content-Type"]
-)
+        app,
+        resources={r"/api/*": {"origins": "*"}},
+        methods=["GET", "POST", "DELETE", "OPTIONS"],
+        allow_headers=["Content-Type"]
+    )
 
+    # Initialize SQLAlchemy
+    db.init_app(app)
 
+    # Register routes
     app.register_blueprint(health_bp)
     app.register_blueprint(expense_bp)
+    app.register_blueprint(ml_bp)
 
-    app.teardown_appcontext(close_db)
     print(app.url_map)
-
     return app
