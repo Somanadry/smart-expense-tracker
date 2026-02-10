@@ -80,10 +80,15 @@ def generate_ml_insights():
         risk = "High"
 
     # chart_data = monthly.astype(str).to_dict(orient="records")
-    monthly["month"] = monthly["month"].dt.strftime("%b")
+    # monthly["month"] = monthly["month"].dt.strftime("%b")
+    # monthly["spent"] = monthly["amount"].astype(float)
+
+    # chart_data = monthly[["month", "spent"]].to_dict(orient="records")
+    monthly["month"] = monthly["month"].astype(str)
     monthly["spent"] = monthly["amount"].astype(float)
 
     chart_data = monthly[["month", "spent"]].to_dict(orient="records")
+
 
 
     # return {
