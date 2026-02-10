@@ -44,7 +44,7 @@ def create_app():
 
     CORS(
         app,
-        resources={r"/api/*": {"origins": "*"}},
+        resources={r"/*": {"origins": "*"}},
         methods=["GET", "POST", "DELETE", "OPTIONS"],
         allow_headers=["Content-Type"]
     )

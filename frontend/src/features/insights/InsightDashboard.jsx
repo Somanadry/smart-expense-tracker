@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchInsights } from "../../api/insightsApi";
+import { fetchInsights } from "../../services/api";
 import KPICards from "./KPICards";
 import SpendingTrendChart from "./SpendingTrendChart";
 import PredictionCard from "./PredictionCard";
