@@ -367,9 +367,28 @@ def clusters():
     return jsonify(spending_clusters())
 
 
+# # ---------------- ANOMALIES ----------------
+# @expense_bp.route("/anomalies", methods=["GET"])
+# def anomalies():
+#     expenses = Expense.query.all()
+#     data = [{"amount": e.amount, "date": e.date} for e in expenses]
+#     return jsonify(detect_anomalies(data))
+
+import pandas as pd
+
 # ---------------- ANOMALIES ----------------
 @expense_bp.route("/anomalies", methods=["GET"])
 def anomalies():
     expenses = Expense.query.all()
-    data = [{"amount": e.amount, "date": e.date} for e in expenses]
-    return jsonify(detect_anomalies(data))
+
+    df = pd.DataFrame([{
+        "amount": e.amount,
+        "date": e.date
+    } for e in expenses])
+
+    if df.empty:
+        return jsonify([])
+
+    df["date"] = pd.to_datetime(df["date"])
+
+    return jsonify(detect_anomalies(df))
