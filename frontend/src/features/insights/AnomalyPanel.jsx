@@ -2,14 +2,17 @@ export default function AnomalyPanel({ anomalies }) {
   return (
     <div className="card shadow-sm p-3">
       <h6>Spending Anomalies</h6>
-      {anomalies.length > 0 ? (
-        <ul>
+
+      {anomalies && anomalies.length > 0 ? (
+        <ul className="mb-0">
           {anomalies.map((a, i) => (
-            <li key={i}>{a}</li>
+            <li key={i}>
+              <strong>₹{a.amount}</strong> on {new Date(a.date).toLocaleDateString()}
+            </li>
           ))}
         </ul>
       ) : (
-        <p>No anomalies detected</p>
+        <p className="text-muted">No anomalies detected</p>
       )}
     </div>
   );
